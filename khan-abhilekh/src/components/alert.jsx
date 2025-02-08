@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { databases } from "../../appwrite";
 import { ID } from "appwrite";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { FaCircle } from "react-icons/fa";
 
 const Alertpage = () => {
   const [loading, setLoading] = useState(false);
