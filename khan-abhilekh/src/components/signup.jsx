@@ -90,9 +90,9 @@ const Signup = () => {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center"
+      className="min-h-screen w-full bg-gray-50 flex items-center justify-center"
     >
-      <div className="bg-white p-8 rounded-[8px] shadow-md w-[60%] flex space-x-10">
+      <div className="bg-white p-8 rounded-[8px] shadow-lg w-[60%] flex space-x-10">
         <div className="w-[50%] mt-8">
           <h2 className="text-3xl font-bold text-center font-montserrat">
             SIGN UP
