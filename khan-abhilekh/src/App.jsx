@@ -10,6 +10,7 @@ import Landing from "./components/Landing";
 import Home from "./components/homepage";
 import Graphs from "./components/graphs";
 import Alertpage from "./components/alert";
+import AlertLogs from "./components/alertlogs";
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/table" element={<ShiftLogTable/>}/>
         <Route path="/graph" element={<Graphs/>}/>
         <Route path="/alert" element={<Alertpage/>}/>
+        <Route path="/alertlogs" element={<AlertLogs/>}/>
       </Routes>
     </Router>
   );
