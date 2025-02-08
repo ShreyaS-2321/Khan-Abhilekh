@@ -161,7 +161,7 @@ const Features = ({ language }) => {
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {features.map((feature, index) => (
-          <div key={index} className="relative group bg-gray-800 p-6 rounded-lg">
+          <div key={index} className="relative group bg-black p-6 rounded-lg border-1">
             <img
               src={feature.imgSrc}
               alt={feature.title}
