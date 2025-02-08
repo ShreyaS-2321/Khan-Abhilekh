@@ -7,6 +7,7 @@ import Signup from "./components/signup";
 import Dashboard from "./components/dashboard";
 import ShiftLogTable from "./components/shiftdata";
 import Landing from "./components/Landing";
+import Home from "./components/homepage";
 
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
       <Routes>
         {/* Define Routes for Login and Signup */}
         <Route path="/shiftform" element={<ShiftLogForm/>}/>
+        <Route path="/home" element={<Home/>}/>
         <Route path="/" element={<Landing/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
