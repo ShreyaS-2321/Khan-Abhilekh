@@ -32,7 +32,7 @@ const Login = () => {
 
       setTimeout(() => {
         setShowPopup(false);
-        navigate("/");
+        navigate("/shiftform");
       }, 1000);
     } catch (loginError) {
       console.error("Login Error:", loginError);
