@@ -1,32 +1,30 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { databases } from "../../appwrite";
 import { ID } from "appwrite";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { FaCircle } from "react-icons/fa";
 
 const Alertpage = () => {
   const [loading, setLoading] = useState(false);
   const [alertData, setAlertData] = useState({
     district: "",
     alertlevel: "",
-    alertcause1: "",
-    alertcause2: "",
-    alertcause3: "",
+    alertcause: "",
   });
 
-  const districtOptions = ["district1", "district2", "district3", "district4"];
-  const alertLevelOption = ["Critcial", "Moderate", "Low"];
-  const alertCauseOption1 = [
+  const districtOptions = ["District1", "District2", "District3", "District4"];
+  const alertLevelOptions = ["Critical", "Moderate", "Low"];
+  const alertCauseOptions = [
     "Cave_ins_and_Collapses",
-    "GasExplosions",
+    "Gas_Explosions",
     "Flooding",
-  ];
-  const alertCauseOption2 = [
     "Ground_Control_Hazards",
-    "improper_ventilation",
-    "heat_stress",
+    "Improper_Ventilation",
+    "Heat_Stress",
+    "Equipment_Malfunctions",
+    "Minor_Injury",
+    "Major_Injury",
   ];
-  const alertCauseOption3 = ["Equipment_Malfunctions", "minor_injury"];
 
   const handleChange = (e) => {
     setAlertData({ ...alertData, [e.target.name]: e.target.value });
@@ -38,18 +36,17 @@ const Alertpage = () => {
 
     try {
       await databases.createDocument(
-        "67a62a0f00267d96a644",
-        "67a69d2b001432b735c4",
-        ID.unique()
-        //   formattedData
+        "67a62a0f00267d96a644", // Database ID
+        "67a69d2b001432b735c4", // Collection ID
+        ID.unique(),
+        alertData // Corrected: Passing the selected values
       );
+
       alert("Alert raised successfully!");
       setAlertData({
         district: "",
         alertlevel: "",
-        alertcause1: "",
-        alertcause2: "",
-        alertcause3: "",
+        alertcause: "",
       });
     } catch (error) {
       alert("Error submitting form: " + error.message);
@@ -63,65 +60,39 @@ const Alertpage = () => {
       <h2 className="text-2xl font-bold text-center mb-6 text-gray-700">
         Alert Raise Form
       </h2>
-      <form
-        onSubmit={handleSubmit}
-        className="grid grid-row-5 md:grid-cols-2 gap-6"
-      >
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Dropdown Fields */}
         {[
-          { name: "District", options: districtOptions },
-          { name: "Alert Level", options: alertLevelOption },
-          { name: "Alert Cause1", options: alertCauseOption1 },
-          { name: "Alert Cause2", options: alertCauseOption2 },
-          { name: "Alert Cause3", options: alertCauseOption3 },
+          { label: "District", name: "district", options: districtOptions },
+          { label: "Alert Level", name: "alertlevel", options: alertLevelOptions },
+          { label: "Alert Cause", name: "alertcause", options: alertCauseOptions },
         ].map((field) => (
           <div key={field.name}>
-            <label className="block font-medium text-gray-700 capitalize">
-              {field.name.replace(/([A-Z])/g, " $1").trim()}
+            <label className="block font-medium text-gray-700">
+              {field.label}
             </label>
             <select
               name={field.name}
               value={alertData[field.name]}
               onChange={handleChange}
               className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              required
             >
-              <option value="">Select {field.name}</option>
+              <option value="">Select {field.label}</option>
               {field.options.map((option) => (
                 <option key={option} value={option}>
-                  {option}
+                  {option.replace(/_/g, " ")}
                 </option>
               ))}
             </select>
           </div>
         ))}
-        {Object.keys(alertData)
-          .filter(
-            (key) =>
-              ![
-                "district",
-                "alertlevel",
-                "alertcause1",
-                "alertcause2",
-                "alertcause3",
-              ].includes(key)
-          )
-          .map((field) => (
-            <div key={field}>
-              <label className="block font-medium text-gray-700 capitalize">
-                {field.replace(/([A-Z])/g, " $1").trim()}
-              </label>
-              <input
-                type="number"
-                name={field}
-                value={alertData[field]}
-                onChange={handleChange}
-                className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-gray-500"
-              />
-            </div>
-          ))}
-        <div className="col-span-2 flex justify-center mt-6">
+
+        {/* Submit Button */}
+        <div className="md:col-span-3 flex justify-center mt-6">
           <button
             type="submit"
-            className="px-6 py-3 bg-black text-white rounded-lg hover:bg-black transition-all flex items-center gap-2"
+            className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-900 transition-all flex items-center gap-2 cursor-pointer"
             disabled={loading}
           >
             {loading ? (
