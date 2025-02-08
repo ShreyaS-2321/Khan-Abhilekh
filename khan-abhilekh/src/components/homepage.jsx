@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, LogOut, Home, Settings, FileText } from "lucide-react";
+import { ChevronLeft, ChevronRight, LogOut, Home,BellPlus,FileText,Siren } from "lucide-react";
 import { Link } from "react-router-dom";
 import morning from "../assets/morning.svg"
 import afternoon from "../assets/afternoon.svg"
@@ -39,9 +39,9 @@ export default function Homepage() {
           <Link to="/table" className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-lg">
             <FileText size={20} /> {isSidebarOpen && "Shift Logs"}
           </Link>
-          <Link to="/settings" className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-lg">
-            <Settings size={20} /> {isSidebarOpen && "Settings"}
-          </Link>
+          <div onClick={handleLogout} className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-lg">
+            <LogOut size={20} /> {isSidebarOpen && "Logout"}
+          </div>
         </nav>
       </div>
 
@@ -49,24 +49,27 @@ export default function Homepage() {
       <div className="flex-1 flex flex-col">
         {/* Navbar */}
         <div className="flex justify-end bg-white p-4 shadow-md gap-4">
+        <div className=" cursor-pointer flex items-center gap-2 text-white rounded-lg bg-red-500 px-4 py-2 hover:bg-red-600">
+            <Siren size={30} />
+          </div>
           <Link to ="/dashboard" className=" cursor-pointer flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg">Dashboard</Link>
-          <button onClick={handleLogout} className=" cursor-pointer flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
-            <LogOut size={20} /> Logout
+          <button className=" cursor-pointer flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+            <BellPlus size={20} /> Create Alert
           </button>
         </div>
 
         {/* Shift Blocks */}
         <div className="flex-1 flex items-center justify-center gap-6 p-6">
           <Link to="/shiftform" className="bg-white p-20 shadow-lg rounded-lg w-1/3 text-center flex-col justify-items-center cursor-pointer">
-          <img src={morning} alt="" />
+          {/* <img src={morning} alt="" /> */}
             <h2 className="text-xl font-semibold mt-2">Morning Shift</h2>
           </Link>
           <Link to="/shiftform" className="bg-white p-20 shadow-lg rounded-lg w-1/3 text-center justify-items-center cursor-pointer">
-          <img src={afternoon} alt="" />
+          {/* <img src={afternoon} alt="" /> */}
             <h2 className="text-xl font-semibold mt-2">Afternoon Shift</h2>
           </Link>
           <Link to="/shiftform" className="bg-white p-20 shadow-lg rounded-lg w-1/3 text-center justify-items-center cursor-pointer">
-          <img src={night} alt="" />
+          {/* <img src={night} alt="" /> */}
             <h2 className="text-xl font-semibold mt-2">Night Shift</h2>
           </Link>
         </div>
