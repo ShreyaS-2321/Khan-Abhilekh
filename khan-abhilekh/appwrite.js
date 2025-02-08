@@ -14,5 +14,25 @@ const account = new Account(client);
 const databases = new Databases(client);
 const storage = new Storage(client);
 
+async function getUserRole(){
+  try{
+    const user = await
+    account.get();
+    console.log(user);
+
+    if(user.labels.includes("admin")
+    ){
+  console.log("User is an Admin");}
+   else if(user.labels.includes("supervisor")){
+    console.log("User is a Supervisor");
+  }else{
+    console.log("User is a Worker");
+  }
+  }catch(error){
+    console.log("Error!!")
+  }
+}
+getUserRole();
+
 // Export account object for usage in other files
 export { client, account, databases, storage };
