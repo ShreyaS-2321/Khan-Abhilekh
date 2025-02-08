@@ -62,11 +62,11 @@ const Dashboard = () => {
     : [];
 
   // Prepare data for Pie Chart (Breakdowns per Shift)
-  const pieData = breakdownData
+  const barData2 = breakdownData
     ? [
-        { name: "Morning Shift", value: breakdownData.morning },
-        { name: "Afternoon Shift", value: breakdownData.afternoon },
-        { name: "Night Shift", value: breakdownData.night },
+        { name: "Morning", value: breakdownData.morning },
+        { name: "Afternoon", value: breakdownData.afternoon },
+        { name: "Night", value: breakdownData.night },
       ]
     : [];
 
@@ -80,8 +80,8 @@ const Dashboard = () => {
       {shiftData && breakdownData ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Bar Chart - Production Comparison */}
-          <div className="bg-white p-4 shadow-lg rounded-lg">
-            <h2 className="text-xl font-semibold mb-2">Overall Shift Production</h2>
+          <div className="bg-white p-4 shadow-lg rounded-lg flex-col gap-2">
+            <h2 className="text-xl text-center font-semibold mb-2">Overall Shift Production(in Tons)</h2>
             <BarChart width={400} height={300} data={barData}>
               <XAxis dataKey="shift" />
               <YAxis />
@@ -91,25 +91,14 @@ const Dashboard = () => {
           </div>
 
           {/* Pie Chart - Breakdown Hours */}
-          <div className="bg-white p-4 shadow-lg rounded-lg">
-            <h2 className="text-xl font-semibold mb-2">Breakdown Hours per Shift</h2>
-            <PieChart width={400} height={300}>
-              <Pie
-                data={pieData}
-                dataKey="value"
-                nameKey="name"
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
-                fill="#8884d8"
-              >
-                {pieData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={colors[index]} />
-                ))}
-              </Pie>
+          <div className="bg-white p-4 shadow-lg rounded-lg flex-col gap-2">
+            <h2 className="text-xl text-center font-semibold mb-2">Breakdown Hours per Shift</h2>
+            <BarChart width={400} height={300} data={barData2}>
+              <XAxis dataKey="name" />
+              <YAxis />
               <Tooltip />
-              <Legend />
-            </PieChart>
+              <Bar dataKey="value" fill="#4CAF50" />
+            </BarChart>
           </div>
         </div>
       ) : (
