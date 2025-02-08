@@ -32,7 +32,7 @@ const Login = () => {
 
       setTimeout(() => {
         setShowPopup(false);
-        navigate("/shiftform");
+        navigate("/home");
       }, 1000);
     } catch (loginError) {
       console.error("Login Error:", loginError);
@@ -46,8 +46,8 @@ const Login = () => {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center">
-      <div className="bg-white p-8 rounded-[8px] shadow-md w-[60%] flex space-x-10">
+      className="min-h-screen flex w-full bg-gray-50 items-center justify-center">
+      <div className="bg-white p-8 rounded-[8px] shadow-lg w-[60%] flex space-x-10">
         <div>
           <img className="" src={loginImage} alt="Login" />
         </div>
